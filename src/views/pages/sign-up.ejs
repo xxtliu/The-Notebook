@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <header>
+    <%- include('../partials/nav') %>
+  </header>
+
+  <div class="container">
+    Sign Up for a new account or <a href="/sign-in">click here to sign in with an existing account</a>
+    <form id="login-form">
+      <label>Login</label>
+      <input id="login" type="text" name="login" />
+      <label>Password</label>
+      <input type="password" name="password" />
+      <button>Log in</button>
+    </form>
+    <div id="login-error" style="display: none;">
+    </div>
+    <a href="/dashboard">Dashboard</a>
+  </div>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+
+<script>
+  window.onload = () => {
+    console.log('Running onload')
+    const firebaseConfig = {
+      apiKey: "AIzaSyD9FQlKShLGh2fDGjpKJ8wOunZxl-oxois",
+      authDomain: "dogland-9610d.firebaseapp.com",
+      projectId: "dogland-9610d",
+      storageBucket: "dogland-9610d.appspot.com",
+      messagingSenderId: "717216947586",
+      appId: "1:717216947586:web:c4db041d463282b010439b",
+      measurementId: "G-DEV82FJLZ3"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+
+    app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+    document
+      .getElementById("login-form")
+      .addEventListener("submit", (event) => {
+        event.preventDefault();
+        const login = event.target.login.value;
+        const password = event.target.password.value;
+
+        // CS5356 TODO #3
+        // Create a new user using the Firebase SDK for Web
+        // Get the users ID token
+        // Start a new session with the users ID token
+        // Redirect the user to the /dashboard
+
+        app.auth().createUserWithEmailAndPassword(login, password)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            user.getIdToken().then((idToken) => {
+              fetch('/sessionLogin', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    idToken
+                  })
+                })
+                .then((responseBody) => {
+                  window.location.assign('/dashboard')
+                })
+                .catch((err) => {
+                  debugger
+                })
+            })
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+      });
+  };
+</script>
+
+</html>
