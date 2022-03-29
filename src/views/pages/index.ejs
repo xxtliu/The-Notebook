@@ -5,9 +5,30 @@
   <%- include('../partials/head') %>
   <!-- Include any custom css classes that you want available on this page here -->
   <style>
+    .buttons {
+      display: block;
+    }
 
+    .button {
+      width: 15em;
+    }
+
+    #sign-in-button {
+      background-color: #EB8172;
+    }
+
+    #sign-up-button {
+      background-color: #F6D7CF;
+    }
+
+    .tagline {
+      width: 60%;
+      font-weight: normal;
+      font-size: 60px;
+      letter-spacing: -5px;
+      line-height: 60px;
+    }
   </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 
 <body>
@@ -15,12 +36,25 @@
     <%- include('../partials/nav') %>
   </header>
 
-  <section class="hero  is-large  is-bold is-primary">
-    <div class="hero-body ">
+  <section class="hero is-medium">
+    <div class="hero-body">
       <div class="container">
-        <h1 class="title is-2">Welcome to Dog Site</h1>
-        <p class="subtitle is-3">This is an example landing page for dogzland</p>
-        <p class="subtitle is-4">by Renzhi Hu</p>
+
+        <section class="section">
+          <div class="tagline">
+            <p>
+              The Notebook is the space for you and your loved ones.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="buttons are-medium">
+            <div><button class="button" id="sign-in-button">SIGN IN</button></div>
+            <div><button class="button" id="sign-up-button">SIGN UP</button></div>
+          </div>
+        </section>
+
       </div>
     </div>
   </section>
