@@ -1,59 +1,28 @@
-<nav class="navbar">
-  <div class="container level" id="nav-container">
-    <% if(locals.email) { %>
-    <p class="level-item has-text-centered">
-      <a herf="dashboard" class="level-item has-text-centered" id="navbar-logo">the notebook</a>
-    </p>
-    <div id="navbarMenu" class="navbar-menu">
-      <div class="navbar-end">
-        <a href="/dashboard" class="navbar-item">
-          <%= email %>
-          <i class="material-icons">person_outline</i>
-        </a>
+<nav class="level navbar">
+
+  <% if(locals.email) { %>
+
+    <div class="navbar-brand">
+      <div class="navbar-item ">
+        <a herf="dashboard" id="navbar-logo">the notebook</a>
       </div>
+    </div>
+
+    <div class="navbar-end">
+      <a href="/dashboard" class="navbar-item">
+        <%= email %>
+      </a>
+      <a href="/" class="navbar-item">Log out</a>
     </div>
 
     <% } else if(locals.hideSignIn) { %>
-    <p class="level-item has-text-centered">
-      <a herf="/dashboard" id="navbar-logo">the notebook</a>
-    </p>
-<!--
-    <p class="level-item has-text-centered">
-      <a href="/sign-up" class="link is-info">SIGN UP</a>
-    </p>
--->
-
-    <% } else { %>
-<!--
-    <div class="level-left">
       <p class="level-item has-text-centered">
-        <a href="/sign-in" class="link is-info">SIGN IN</a>
+        <a herf="/dashboard" id="navbar-logo">the notebook</a>
       </p>
-    </div>
--->
-    <p class="level-item has-text-centered">
-      <a herf="/dashboard" class="level-center" id="navbar-logo">the notebook</a>
-    </p>
-<!--
-    <div class="level-right">
-      <p class="level-item has-text-centered">
-        <a href="/sign-up" class="link is-info level-right">SIGN UP</a>
-      </p>
-    </div>
-  -->
 
-    <!-- <div id="navbarMenu" class="navbar-menu">
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <a href="/sign-in" class="button is-primary">Sign In
-          </a>
-        </div>
-        <div class="navbar-item">
-          <a href="/sign-up" class="button is-primary">Sign Up
-          </a>
-        </div>
-      </div>
-    </div> -->
-    <% }%>
-  </div>
+      <% } else { %>
+        <p class="level-item has-text-centered">
+          <a herf="/dashboard" class="level-center" id="navbar-logo">the notebook</a>
+        </p>
+        <% }%>
 </nav>

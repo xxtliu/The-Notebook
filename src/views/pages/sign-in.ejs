@@ -3,9 +3,9 @@
 
 <head>
   <%- include('../partials/head') %>
-  <style>
+    <style>
 
-  </style>
+    </style>
 </head>
 
 <body>
@@ -26,32 +26,32 @@
     <div class="container">
       <div class="columns is-centered">
 
-      <form class="block" id = "login-form">
-        <div class="title">
-          <h1 class="title">Sign in to The Notebook</h1>
-          <h2 class="subtitle">
-            Connect with your other half :)
-          </h2>
-        </div>
-        
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input class="input" type="text" name="login">
+        <form class="block" id="login-form">
+          <div class="title">
+            <h1 class="title">Sign in to The Notebook</h1>
+            <h2 class="subtitle">
+              Connect with your other half :)
+            </h2>
           </div>
-        </div>
-      
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
-            <input class="input" type="password" name="password" id="password">
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" id="login" type="text" name="login" placeholder="e.g. alex@gmail.com">
+            </div>
           </div>
-        </div>
-      
-        <button class="button">Sign In</button>
-      </form>
-    </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" name="password" id="password" placeholder="********">
+            </div>
+          </div>
+
+          <button class="button">Sign In</button>
+        </form>
       </div>
+    </div>
     <div id="login-error">
 
   </section>
@@ -97,14 +97,14 @@
             const user = userCredential.user;
             user.getIdToken().then((idToken) => {
               fetch('/sessionLogin', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    idToken
-                  })
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  idToken
                 })
+              })
                 .then((responseBody) => {
                   window.location.assign('/dashboard')
                 })
