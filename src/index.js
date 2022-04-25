@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const admin = require("firebase-admin");
+const admin = require('firebase-admin');
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -10,14 +10,14 @@ const port = process.env.PORT || 8080;
 // Uncomment this next line after you've created
 // serviceAccountKey.json
 const serviceAccount = require("./../config/serviceAccountKey.json");
-const userFeed = require("./app/user-feed");
-const authMiddleware = require("./app/auth-middleware");
 
-// CS5356 TODO #2
-// Uncomment this next block after you've created serviceAccountKey.json
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+const userFeed = require("./app/user-feed");
+const authMiddleware = require("./app/auth-middleware");
+const userService = require("./app/user-service");
 
 // use cookies
 app.use(cookieParser());
@@ -44,7 +44,9 @@ app.get("/sign-in", function (req, res) {
 });
 
 app.get("/sign-up", function (req, res) {
-  res.render("pages/sign-up");
+  res.render("pages/sign-up", {
+    type: 'owner'
+  });
 });
 
 app.get("/dashboard", authMiddleware, async function (req, res) {
@@ -62,6 +64,8 @@ app.post("/sessionLogin", async (req, res) => {
   // Set that cookie with the name 'session'
   // And then return a 200 status code instead of a 501
   const idToken = req.body.idToken;
+  const signInType = req.body.signInType;
+  const username = req.body.username;
 
   const expiresIn = 60 * 60 * 1000;
 
@@ -77,9 +81,25 @@ app.post("/sessionLogin", async (req, res) => {
           secure: true
         };
         res.cookie('session', sessionCookie, options);
-        res.status(201).send(JSON.stringify({
-          status: 'success'
-        }));
+
+        admin
+          .auth()
+          .verifySessionCookie(sessionCookie, true /** checkRevoked */ )
+          .then(userData => {
+            console.log("Logged in:", userData.email);
+
+            const id = userData.sub;
+            const email = userData.email;
+
+            if (signInType === 'register') {
+              // save it to firestore
+              userService.createUser(id, email, username)
+            }
+
+            res.status(201).send(JSON.stringify({
+              status: 'success'
+            }))
+          })
       },
       (error) => {
         res.status(401).send(error.toString());

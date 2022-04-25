@@ -4,7 +4,7 @@
 
     <div class="navbar-brand">
       <div class="navbar-item ">
-        <a herf="dashboard" id="navbar-logo">the notebook</a>
+        <a herf="/dashboard" id="navbar-logo">the notebook</a>
       </div>
     </div>
 
@@ -17,12 +17,12 @@
 
     <% } else if(locals.hideSignIn) { %>
       <p class="level-item has-text-centered">
-        <a herf="/dashboard" id="navbar-logo">the notebook</a>
+        <a herf="/" class="level-center" id="navbar-logo">the notebook</a>
       </p>
 
       <% } else { %>
         <p class="level-item has-text-centered">
-          <a herf="/dashboard" class="level-center" id="navbar-logo">the notebook</a>
+          <a herf="/" class="level-center" id="navbar-logo">the notebook</a>
         </p>
         <% }%>
 </nav>

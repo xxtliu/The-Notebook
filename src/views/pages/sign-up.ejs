@@ -6,55 +6,69 @@
 </head>
 
 <body>
-  <header>
-    <%- include('../partials/nav') %>
-  </header>
-    
-  <aside class="menu">
-    <div>
-      <a href="/" button class="button is-text">
-        BACK
-      </a>
-    </div>
-  </aside>
+  <div class="container">
 
-  <section class="section is-medium">
-    <div class="container">
+    <header>
+      <%- include('../partials/nav') %>
+    </header>
+
+    <aside class="menu">
+      <div>
+        <a href="/" class="button is-text" id="back-button">
+          BACK
+        </a>
+      </div>
+    </aside>
+
+    <section class="section is-medium">
       <div class="columns is-centered">
 
-      <form class="block" id = "login-form">
-        <div class="title">
-          <h1 class="title">New to The Notebook?</h1>
-          <h2 class="subtitle">
-            Sign up to join!
-          </h2>
-        </div>
-
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input class="input" id="login" type="text" name="login" placeholder="e.g. alex@gmail.com">
+        <form class="block" id="login-form">
+          <div class="title">
+            <h1 class="title">New to The Notebook?</h1>
+            <h2 class="subtitle">
+              Sign up to join!
+            </h2>
           </div>
-        </div>
-      
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
-            <input class="input" type="password" name="password" placeholder="********">
+
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control">
+              <input class="input" id="username" type="text" name="username" placeholder="Alex G">
+            </div>
           </div>
-        </div>
-        
-        <button class="button">Join</button>
-        Or <a href="/sign-in">click here to sign in with an existing account</a>
-      </form>
-    </div>
-    </div>
-    <div id="login-error" style="display: none;">
-  
 
-  </section>
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" id="login" type="text" name="login" placeholder="e.g. alex@gmail.com">
+            </div>
+          </div>
 
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" name="password" placeholder="********">
+            </div>
+          </div>
+          <div class="field">
+            <button class="button">Join</button>
+          </div>
 
+          <div class="field">
+            Or <a href="/sign-in">click here to sign in with an existing account</a>
+          </div>
+
+        </form>
+      </div>
+      <div id="login-error" style="display: none;">
+    </section>
+
+    <footer>
+      <%- include('../partials/footer') %>
+    </footer>
+
+  </div>
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
@@ -81,6 +95,7 @@
       .getElementById("login-form")
       .addEventListener("submit", (event) => {
         event.preventDefault();
+        const username = event.target.username.value;
         const login = event.target.login.value;
         const password = event.target.password.value;
 
@@ -96,14 +111,12 @@
             const user = userCredential.user;
             user.getIdToken().then((idToken) => {
               fetch('/sessionLogin', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    idToken
-                  })
-                })
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idToken, username, signInType: 'register' })
+              })
                 .then((responseBody) => {
                   window.location.assign('/dashboard')
                 })

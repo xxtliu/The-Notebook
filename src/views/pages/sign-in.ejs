@@ -9,24 +9,26 @@
 </head>
 
 <body>
-  <header>
-    <%- include('../partials/nav', { hideSignIn: true }) %>
-  </header>
+  <div class="container">
 
-  <aside class="menu">
-    <div>
-      <a href="/" button class="button is-text">
-        BACK
-      </a>
-    </div>
-  </aside>
+    <header>
+      <%- include('../partials/nav', { hideSignIn: true }) %>
+    </header>
+
+    <aside class="menu">
+      <div>
+        <a href="/" class="button is-text" id="back-button">
+          BACK
+        </a>
+      </div>
+    </aside>
 
 
-  <section class="section is-medium">
-    <div class="container">
+    <section class="section is-medium">
       <div class="columns is-centered">
 
         <form class="block" id="login-form">
+
           <div class="title">
             <h1 class="title">Sign in to The Notebook</h1>
             <h2 class="subtitle">
@@ -48,15 +50,24 @@
             </div>
           </div>
 
-          <button class="button">Sign In</button>
+          <div class="field">
+            <button class="button">Sign In</button>
+          </div>
+
+          <div class="field">
+            Or <a href="/sign-up">click here to create a new account</a>
+          </div>
+
         </form>
       </div>
-    </div>
-    <div id="login-error">
+      <div id="login-error">
+    </section>
 
-  </section>
+    <footer>
+      <%- include('../partials/footer') %>
+    </footer>
 
-
+  </div>
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
