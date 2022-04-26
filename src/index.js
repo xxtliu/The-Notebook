@@ -6,9 +6,6 @@ const admin = require('firebase-admin');
 const app = express();
 const port = process.env.PORT || 8080;
 
-// CS5356 TODO #2
-// Uncomment this next line after you've created
-// serviceAccountKey.json
 const serviceAccount = require("./../config/serviceAccountKey.json");
 
 admin.initializeApp({
@@ -51,18 +48,15 @@ app.get("/sign-up", function (req, res) {
 
 app.get("/dashboard", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
+  const userInfo = await userService.getUserByEmail(req.user.email);
   res.render("pages/dashboard", {
     user: req.user,
+    userInfo,
     feed
   });
 });
 
 app.post("/sessionLogin", async (req, res) => {
-  // CS5356 TODO #4
-  // Get the ID token from the request body
-  // Create a session cookie using the Firebase Admin SDK
-  // Set that cookie with the name 'session'
-  // And then return a 200 status code instead of a 501
   const idToken = req.body.idToken;
   const signInType = req.body.signInType;
   const username = req.body.username;
