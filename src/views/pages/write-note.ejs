@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+
+</head>
+
+<body>
+  <header>
+    <%- include('../partials/nav', { email: user.email }) %>
+  </header>
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-3 " style="text-align: right;">
+        <aside class="menu">
+        </aside>
+      </div>
+      <div class="column is-4">
+        <div class="mb-6">
+          <div class="has-text-weight-bold mb-2">
+           
+            Write something 💬    
+          </div>
+          <form action="/dog-messages" method="post">
+            <input class="input" type="text" name="message" placeholder="How are you feeling today? " />
+            <button class="button mt-2">SUBMIT</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-3 " style="text-align: right;">
+        <aside class="menu">
+        </aside>
+      </div>
+      <div class="column is-4">
+        <div class="mb-6">
+          <div class="has-text-weight-bold mb-2">
+           Write something 💬    
+          </div>
+          <form action="/dog-messages" method="post">
+            <input class="input" type="text" name="message" placeholder="How are you feeling today? " />
+            <button class="button mt-2">SUBMIT</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<%- include('../partials/footer') %>
+
+</html>
+
