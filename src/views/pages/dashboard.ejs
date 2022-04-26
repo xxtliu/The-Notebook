@@ -3,46 +3,85 @@
 
 <head>
   <%- include('../partials/head') %>
-
+    <style>
+      .columns,
+      .column,
+      .box {
+        background-color: rgb(255, 254, 254);
+      }
+    </style>
 </head>
 
 <body>
-  <header>
-    <%- include('../partials/nav', { email: user.email }) %>
-  </header>
+  <div class="container">
+    <header>
+      <%- include('../partials/nav', { email: user.email }) %>
+    </header>
 
-  <div class="box">
-    <div class="columns">
-      <div class="column is-3 ">
-            There is a new note for you!
+    <section class="section is-small">
+
+      <!-- <div class="title is-5">your notebook</div> -->
+
+      <div class="boxes">
+
+        <div class="box">
+          <div class="columns">
+            <div class="column is-3 ">
+              There is a new note for you!
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="columns">
+            <div class="column is-3 ">
+              From the other
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="columns">
+            <div class="column is-3 ">
+              From you
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="columns">
+            <div class="column is-3 ">
+              Placeholder for upcoming features!
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="columns">
+            <div class="column is-3 ">
+              Placeholder for upcoming features!
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="columns">
+            <div class="column is-3 ">
+              Placeholder for upcoming features!
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="columns">
+            <div class="column is-3 ">
+              Placeholder for upcoming features!
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
-
-  <div class="box">
-    <div class="columns">
-      <div class="column is-3 " >
-            Placeholder for upcoming features!
-      </div>
-    </div>
-  </div>
-
-  <div class="box">
-    <div class="columns">
-      <div class="column is-3 ">
-            From the other
-      </div>
-    </div>
-  </div>
-
-  <div class="box">
-    <div class="columns">
-      <div class="column is-3 ">
-            From you
-      </div>
-    </div>
-  </div>
-
 </body>
 
 <%- include('../partials/footer') %>
