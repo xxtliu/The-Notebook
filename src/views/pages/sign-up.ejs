@@ -20,49 +20,53 @@
       </div>
     </aside>
 
-    <section class="section is-medium">
-      <div class="columns is-centered">
+    <div class="sign-div">
 
-        <form class="block" id="login-form">
-          <div class="title">
-            <h1 class="title">New to The Notebook?</h1>
-            <h2 class="subtitle">
-              Sign up to join!
-            </h2>
-          </div>
+      <section class="section is-small">
+        <div class="columns is-centered">
 
-          <div class="field">
-            <label class="label">Username</label>
-            <div class="control">
-              <input class="input" id="username" type="text" name="username" placeholder="Alex G">
+          <form class="block" id="login-form">
+            <div class="title">
+              <h1 class="title">New to The Notebook?</h1>
+              <h2 class="subtitle">
+                Sign up to join!
+              </h2>
             </div>
-          </div>
 
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-              <input class="input" id="login" type="text" name="login" placeholder="e.g. alex@gmail.com">
+            <div class="field">
+              <label class="label">Username</label>
+              <div class="control">
+                <input class="input" id="username" type="text" name="username" placeholder="Alex G">
+              </div>
             </div>
-          </div>
 
-          <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input class="input" type="password" name="password" placeholder="********">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" id="login" type="text" name="login" placeholder="e.g. alex@gmail.com">
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <button class="button">Join</button>
-          </div>
 
-          <div class="field">
-            Or <a href="/sign-in">click here to sign in with an existing account</a>
-          </div>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" name="password" placeholder="********">
+              </div>
+            </div>
+            <div class="field">
+              <button class="button">Join</button>
+            </div>
 
-        </form>
-      </div>
-      <div id="login-error" style="display: none;">
-    </section>
+            <div class="field">
+              Or <a href="/sign-in">click here to sign in with an existing account</a>
+            </div>
+
+          </form>
+        </div>
+        <div id="login-error" style="display: none;">
+      </section>
+    </div>
+
     <%- include('../partials/footer') %>
   </div>
 </body>
