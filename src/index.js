@@ -56,6 +56,14 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
   });
 });
 
+app.get("/write-note", authMiddleware, async function (req, res) {
+  const feed = await userFeed.get();
+  res.render("pages/write-note", {
+    user: req.user,
+    feed
+  });
+});
+
 app.post("/sessionLogin", async (req, res) => {
   const idToken = req.body.idToken;
   const signInType = req.body.signInType;
