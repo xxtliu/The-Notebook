@@ -5,7 +5,7 @@ const userFeed = [];
 
 const get = async () => {
   if (userFeed.length === 0) {
-    const response = await fetch("https://dog.ceo/api/breeds/image/random/5");
+    const response = await fetch("https://dog.ceo/api/breeds/image/random/7");
     const body = await response.json();
     for (const dogUrl of body.message) {
       userFeed.push({
@@ -13,6 +13,7 @@ const get = async () => {
         nameHandle: `@${casual.username}`,
         message: `${casual.sentence}. ${casual.sentence}`,
         imageSource: dogUrl,
+        wishornote: casual.coin_flip,
       });
     }
   } else {
@@ -30,6 +31,7 @@ const add = async (user, message) => {
     nameHandle: user.email,
     message: message,
     imageSource: body.message,
+    wishornote: wishornote,
   });
 };
 
