@@ -6,6 +6,9 @@ const admin = require('firebase-admin');
 const app = express();
 const port = process.env.PORT || 8080;
 
+// CS5356 TODO #2
+// Uncomment this next line after you've created
+// serviceAccountKey.json
 const serviceAccount = require("./../config/serviceAccountKey.json");
 
 admin.initializeApp({
@@ -46,12 +49,11 @@ app.get("/sign-up", function (req, res) {
   });
 });
 
+
 app.get("/dashboard", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
-  const userInfo = await userService.getUserByEmail(req.user.email);
   res.render("pages/dashboard", {
     user: req.user,
-    userInfo,
     feed
   });
 });
@@ -64,7 +66,20 @@ app.get("/write-note", authMiddleware, async function (req, res) {
   });
 });
 
+app.get("/make-a-wish", authMiddleware, async function (req, res) {
+  const feed = await userFeed.get();
+  res.render("pages/make-a-wish", {
+    user: req.user,
+    feed
+  });
+});
+
 app.post("/sessionLogin", async (req, res) => {
+  // CS5356 TODO #4
+  // Get the ID token from the request body
+  // Create a session cookie using the Firebase Admin SDK
+  // Set that cookie with the name 'session'
+  // And then return a 200 status code instead of a 501
   const idToken = req.body.idToken;
   const signInType = req.body.signInType;
   const username = req.body.username;
@@ -115,14 +130,12 @@ app.get("/sessionLogout", (req, res) => {
 });
 
 app.post("/dog-messages", authMiddleware, async (req, res) => {
-  // CS5356 TODO #5
-  // Get the message that was submitted from the request body
-  // Get the user object from the request body
-  // Add the message to the userFeed so its associated with the user
+
   try {
     const message = req.body.message;
     const user = req.user;
-    await userFeed.add(user, message);
+    const wishornote = req.body.wishornote;
+    await userFeed.add(user, message, wishornote);
     res.redirect("/dashboard");
   } catch (err) {
     res.status(500).send({
@@ -130,6 +143,7 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
     });
   }
 });
+
 
 app.listen(port);
 console.log("Server star`ted at http://localhost:" + port);
