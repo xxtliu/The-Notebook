@@ -8,49 +8,38 @@
 
 <body>
   <header>
-    <%- include('../partials/nav', { email: user.email }) %>
+    <%- include('../partials/nav') %>
   </header>
 
-  <div class="container">
-    <div class="columns">
-      <div class="column is-3 " style="text-align: right;">
-        <aside class="menu">
-        </aside>
-      </div>
-      <div class="column is-4">
-        <div class="mb-6">
-          <div class="has-text-weight-bold mb-2">
-           
-            Write something 💬    
-          </div>
-          <form action="/dog-messages" method="post">
-            <input class="input" type="text" name="message" placeholder="How are you feeling today? " />
-            <button class="button mt-2">SUBMIT</button>
-          </form>
-        </div>
-      </div>
+  <aside class="menu">
+    <div>
+      <a href="/dashboard" class="button is-text" id="back-button">
+        《 BACK
+      </a>
     </div>
-  </div>
+  </aside>
 
-  <div class="container">
-    <div class="columns">
-      <div class="column is-3 " style="text-align: right;">
-        <aside class="menu">
-        </aside>
-      </div>
-      <div class="column is-4">
-        <div class="mb-6">
-          <div class="has-text-weight-bold mb-2">
-           Write something 💬    
+  <section class="section is-medium">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-3" style="text-align: right;">
+          <aside class="menu">
+          </aside>
+        </div>
+        <div class="column is-4">
+          <div class="mb-6">
+            <div class="has-text-weight-bold mb-2">
+              Write a note 💬  
+            </div>
+            <form action="/dog-messages" method="post">
+              <input class="input" type="text" name="message" placeholder="Today I am feeling ... " />
+              <button class="button mt-2">SUBMIT</button>
+            </form>
           </div>
-          <form action="/dog-messages" method="post">
-            <input class="input" type="text" name="message" placeholder="How are you feeling today? " />
-            <button class="button mt-2">SUBMIT</button>
-          </form>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
 </body>
 

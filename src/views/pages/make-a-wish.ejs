@@ -8,8 +8,16 @@
 
 <body>
   <header>
-    <%- include('../partials/nav', { email: user.email }) %>
+    <%- include('../partials/nav', { makewish: true} ) %>
   </header>
+
+  <aside class="menu">
+    <div>
+      <a href="/dashboard" class="button is-text" id="back-button">
+        《 BACK
+      </a>
+    </div>
+  </aside>
 
   <section class="section is-medium">
     <div class="container">
@@ -25,6 +33,7 @@
             </div>
             <form action="/dog-messages" method="post">
               <input class="input" type="text" name="message" placeholder=" Type here " />
+              
               <button class="button mt-2">Make a Wish ✨</button>
             </form>
           </div>

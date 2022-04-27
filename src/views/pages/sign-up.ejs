@@ -86,11 +86,8 @@
       appId: "1:717216947586:web:c4db041d463282b010439b",
       measurementId: "G-DEV82FJLZ3"
     };
-
     const app = firebase.initializeApp(firebaseConfig);
-
     app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
-
     document
       .getElementById("login-form")
       .addEventListener("submit", (event) => {
@@ -98,13 +95,11 @@
         const username = event.target.username.value;
         const login = event.target.login.value;
         const password = event.target.password.value;
-
         // CS5356 TODO #3
         // Create a new user using the Firebase SDK for Web
         // Get the users ID token
         // Start a new session with the users ID token
         // Redirect the user to the /dashboard
-
         app.auth().createUserWithEmailAndPassword(login, password)
           .then((userCredential) => {
             // Signed in 
