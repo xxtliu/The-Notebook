@@ -3,33 +3,49 @@
 
 <head>
   <%- include('../partials/head') %>
+    <style>
+      .notification {
+        background-color: #dee3ff;
+      }
 
+      .content,
+      .media,
+      .media-content,
+      .media-left,
+      .title,
+      .subtitle,
+      .image {
+        background-color: transparent;
+      }
+    </style>
 </head>
 
 <body>
-  <header>
-    <%- include('../partials/nav', { email: user.email }) %>
-  </header>
-
-  <div class="box">
-    <div class="columns is-centered">
-      <div class="column is-3 ">
-            Check out the new notes for you!
-      </div>
-    </div>
-  </div>
-
   <div class="container">
-    <div class="columns">
-      <div class="column is-3 " style="text-align: right;">
-        
-      </div>
-      <div class="column is-5">
-        <div class="feed-stream">
-          <%- include('../partials/feed-stream', { feed: feed }) %>
+
+    <header>
+      <%- include('../partials/nav', { email: user.email }) %>
+    </header>
+
+    <section class="section is-small">
+
+      <div class="columns">
+        <div class="column is-2" style="text-align: right;"></div>
+
+        <div class="column is-8">
+          <div class="box notification">
+            <button class="delete"></button>
+            Check out the new notes for you!
+          </div>
+
+          <div class="feed-stream">
+            <%- include('../partials/feed-stream', { feed: feed }) %>
+          </div>
         </div>
       </div>
-    </div>
+
+    </section>
+
   </div>
 
 

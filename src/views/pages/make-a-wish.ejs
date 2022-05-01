@@ -7,20 +7,20 @@
 </head>
 
 <body>
-  <header>
-    <%- include('../partials/nav', { makewish: true} ) %>
-  </header>
+  <div class="container">
+    <header>
+      <%- include('../partials/nav', { makewish: true} ) %>
+    </header>
 
-  <aside class="menu">
-    <div>
-      <a href="/dashboard" class="button is-text" id="back-button">
-        《 BACK
-      </a>
-    </div>
-  </aside>
+    <aside class="menu">
+      <div>
+        <a href="/dashboard" class="button is-text" id="back-button">
+          BACK
+        </a>
+      </div>
+    </aside>
 
-  <section class="section is-medium">
-    <div class="container">
+    <section class="section is-medium">
       <div class="columns">
         <div class="column is-3" style="text-align: right;">
           <aside class="menu">
@@ -29,22 +29,20 @@
         <div class="column is-4">
           <div class="mb-6">
             <div class="has-text-weight-bold mb-2">
-              I want to eat / see / go to ...   
+              I want to eat / see / go to ...
             </div>
             <form action="/dog-messages" method="post">
               <input class="input" type="text" name="message" placeholder=" Type here " />
-              
+
               <button class="button mt-2">Make a Wish ✨</button>
             </form>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
+    </section>
+  </div>
 </body>
 
 <%- include('../partials/footer') %>
 
 </html>
-

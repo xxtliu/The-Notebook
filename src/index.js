@@ -44,16 +44,23 @@ app.get("/sign-in", function (req, res) {
 });
 
 app.get("/sign-up", function (req, res) {
-  res.render("pages/sign-up", {
-    type: 'owner'
+  res.render("pages/sign-up");
+});
+
+app.get("/settings", authMiddleware, async function (req, res) {
+  const userInfo = await userService.getUserByEmail(req.user.email);
+  res.render("pages/settings", {
+    user: req.user,
+    userInfo
   });
 });
 
-
 app.get("/dashboard", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
+  const userInfo = await userService.getUserByEmail(req.user.email);
   res.render("pages/dashboard", {
     user: req.user,
+    userInfo,
     feed
   });
 });
@@ -144,6 +151,15 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   }
 });
 
+app.post("/edit-profile", authMiddleware, async (req, res) => {
+  // received changed info from FE
+  // store to the firestore/db
+  const username = req.body.username;
+  const location = req.body.location;
+  const viewer = req.body.viewer;
+  const email = req.user.email;
+  userService.updateUser(email, username, viewer, location)
+})
 
 app.listen(port);
 console.log("Server star`ted at http://localhost:" + port);

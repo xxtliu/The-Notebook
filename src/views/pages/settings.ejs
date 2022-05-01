@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <%- include('../partials/nav') %>
+    </header>
+
+    <aside class="menu">
+      <div>
+        <a href="/dashboard" class="button is-text" id="back-button">
+          BACK
+        </a>
+      </div>
+    </aside>
+
+    <section class="section is-small">
+      <div class="columns is-centered">
+        <div class="column is-6">
+          <form action="/edit-profile" method="post" class="block" id="info-form">
+
+            <div class="title">
+              <h1 class="title">Hi, <%= userInfo.username %> :)</h1>
+            </div>
+
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" id="username" type="text" name="username" required="required"
+                  value="<%= userInfo.username %>">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" id="email" type="text" name="email" required="required" readonly="readonly"
+                  value="<%= userInfo.email %>">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Current Location</label>
+              <div class="control">
+                <input class="input" id="location" type="text" name="location"
+                  placeholder="What's your current location?" value="<%= userInfo.location %>">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Authorized Viewer</label>
+              <div class="control">
+                <input class="input" id="viewer" type="text" name="viewer" placeholder="Enter your assigned email"
+                  value="<%= userInfo.viewer %>">
+              </div>
+            </div>
+
+            <div class="field">
+              <button class="button" id="update-button">Update</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+  <%- include('../partials/footer') %>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+
+<script>
+
+  document
+    .getElementById("info-form")
+    .addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const username = event.target.username.value;
+      const location = event.target.location.value;
+      const viewer = event.target.viewer.value;
+
+      fetch('/edit-profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, location, viewer })
+      })
+        .then((response) => {
+          document.getElementById("update-button").innerHTML = 'Updated!'
+        })
+        .catch((err) => {
+          debugger
+        })
+
+    });
+
+</script>
+
+
+</html>
