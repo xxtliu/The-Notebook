@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', {pageTitle: 'Homepage' }) %>
     <!-- Include any custom css classes that you want available on this page here -->
     <style>
       .buttons {
@@ -63,10 +63,8 @@
 
       </div>
     </section>
+    <%- include('../partials/footer') %>
   </div>
-
 </body>
-
-<%- include('../partials/footer') %>
 
 </html>

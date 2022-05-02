@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', {pageTitle: 'Dashboard' }) %>
     <style>
       .notification {
         background-color: #dee3ff;
@@ -44,9 +44,10 @@
         </div>
       </div>
     </section>
+    <%- include('../partials/footer') %>
   </div>
-  <%- include('../partials/footer') %>
 </body>
+
 <script>
   function remove() {
     const notif = document.getElementById("notification");

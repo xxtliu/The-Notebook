@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', {pageTitle: 'Settings' }) %>
 </head>
 
 <body>
@@ -67,8 +67,8 @@
         </div>
       </div>
     </section>
+    <%- include('../partials/footer') %>
   </div>
-  <%- include('../partials/footer') %>
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
