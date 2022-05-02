@@ -9,35 +9,38 @@
 <body>
   <div class="container">
     <header>
-      <%- include('../partials/nav', { makewish: true} ) %>
+      <%- include('../partials/nav', { makewish: true, signedIn: true} ) %>
     </header>
 
     <aside class="menu">
       <div>
         <a href="/dashboard" class="button is-text" id="back-button">
-          BACK
-        </a>
+          << </a>
       </div>
     </aside>
 
     <section class="section is-medium">
       <div class="columns">
+
         <div class="column is-3" style="text-align: right;">
           <aside class="menu">
           </aside>
         </div>
-        <div class="column is-4">
+
+        <div class="column is-6">
           <div class="mb-6">
-            <div class="has-text-weight-bold mb-2">
+            <div class="has-text-weight-bold mb-4">
               I want to eat / see / go to ...
             </div>
             <form action="/make-wish" method="post">
-              <input class="input" type="text" name="message" placeholder=" Type here " />
-
-              <button class="button mt-2">Make a Wish ✨</button>
+              <input class="input" type="text" name="message" placeholder="Type here" style="height:150px" />
+              <div class="field form-button-div">
+                <button class="button mt-2">MAKE A WISH</button>
+              </div>
             </form>
           </div>
         </div>
+
       </div>
     </section>
   </div>

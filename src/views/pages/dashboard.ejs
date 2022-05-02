@@ -24,7 +24,7 @@
   <div class="container">
 
     <header>
-      <%- include('../partials/nav', { email: user.email }) %>
+      <%- include('../partials/nav', { signedIn: true }) %>
     </header>
 
     <section class="section is-small">
@@ -33,8 +33,8 @@
         <div class="column is-2" style="text-align: right;"></div>
 
         <div class="column is-8">
-          <div class="box notification">
-            <button class="delete"></button>
+          <div class="box notification" id="notification">
+            <button class="delete" onclick="remove()"></button>
             Check out the new notes for you!
           </div>
 
@@ -47,5 +47,11 @@
   </div>
   <%- include('../partials/footer') %>
 </body>
+<script>
+  function remove() {
+    const notif = document.getElementById("notification");
+    notif.remove();
+  }
+</script>
 
 </html>

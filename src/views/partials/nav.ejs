@@ -1,6 +1,6 @@
-<nav class="level navbar">
+<nav class="level navbar" style="height: 85px;">
 
-  <% if(locals.email) { %>
+  <% if(signedIn) { %>
 
     <div class="navbar-brand">
       <div class="navbar-item ">
@@ -9,22 +9,18 @@
     </div>
 
     <div class="navbar-end">
-      <a href="/settings" class="navbar-item">
-        <%= userInfo.username %> Account Settings ⚙️
-      </a>
+      <div class="navbar-item">
+        Welcome, <%= userInfo.username %> 🥳
+      </div>
       <a href="/write-note" class="navbar-item">WRITE A NOTE ✍️</a>
       <a href="/make-a-wish" class="navbar-item">MAKE A WISH 🔮</a>
+      <a href="/settings" class="navbar-item">SETTINGS ⚙️</a>
       <a href="/sessionLogout" class="navbar-item">LOG OUT</a>
     </div>
 
-    <% } else if(locals.hideSignIn) { %>
+    <% } else { %>
       <p class="level-item has-text-centered">
         <a herf="/" class="level-center" id="navbar-logo">the notebook</a>
       </p>
-
-      <% } else { %>
-        <p class="level-item has-text-centered">
-          <a herf="/" class="level-center" id="navbar-logo">the notebook</a>
-        </p>
-        <% }%>
+      <% }%>
 </nav>

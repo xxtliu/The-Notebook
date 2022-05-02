@@ -66,17 +66,21 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
 });
 
 app.get("/write-note", authMiddleware, async function (req, res) {
+  const userInfo = await userService.getUserByEmail(req.user.email);
   const feed = await userFeed.get();
   res.render("pages/write-note", {
     user: req.user,
+    userInfo,
     feed
   });
 });
 
 app.get("/make-a-wish", authMiddleware, async function (req, res) {
+  const userInfo = await userService.getUserByEmail(req.user.email);
   const feed = await userFeed.get();
   res.render("pages/make-a-wish", {
     user: req.user,
+    userInfo,
     feed
   });
 });

@@ -9,13 +9,13 @@
 <body>
   <div class="container">
     <header>
-      <%- include('../partials/nav') %>
+      <%- include('../partials/nav', { signedIn: true }) %>
     </header>
 
     <aside class="menu">
       <div>
         <a href="/dashboard" class="button is-text" id="back-button">
-          BACK </a>
+          << </a>
       </div>
     </aside>
 
@@ -25,14 +25,17 @@
           <aside class="menu">
           </aside>
         </div>
-        <div class="column is-4">
+        <div class="column is-6">
           <div class="mb-6">
-            <div class="has-text-weight-bold mb-2">
+            <div class="has-text-weight-bold mb-4">
               Write a note 💬
             </div>
             <form action="/write-notes" method="post">
-              <input class="input" type="text" name="message" placeholder="Today I am feeling ... " />
-              <button class="button mt-2">SUBMIT</button>
+              <input class="input" type="text" name="message" placeholder="Today I am feeling ... "
+                style="height:150px" />
+              <div class="field form-button-div">
+                <button class="button mt-2">POST</button>
+              </div>
             </form>
           </div>
         </div>
