@@ -169,11 +169,17 @@ app.post("/make-wish", authMiddleware, async (req, res) => {
 app.post("/edit-profile", authMiddleware, async (req, res) => {
   // received changed info from FE
   // store to the firestore/db
-  const username = req.body.username;
-  const location = req.body.location;
-  const viewer = req.body.viewer;
-  const email = req.user.email;
-  userService.updateUser(email, username, viewer, location)
+  try {
+    const username = req.body.username;
+    const location = req.body.location;
+    const viewer = req.body.viewer;
+    const email = req.user.email;
+    userService.updateUser(email, username, viewer, location)
+    res.redirect("/settings");
+  } catch (err) {
+    console.log(err);
+  }
+
 })
 
 app.listen(port);

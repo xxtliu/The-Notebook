@@ -60,8 +60,8 @@
               </div>
             </div>
 
-            <div class="field">
-              <button class="button" id="update-button">Update</button>
+            <div class="field form-button-div">
+              <button class="button" id="update-button">UPDATE</button>
             </div>
 
           </form>
@@ -93,13 +93,14 @@
         },
         body: JSON.stringify({ username, location, viewer })
       })
-        .then((response) => {
-          document.getElementById("update-button").innerHTML = 'Updated!'
+        .then(() => {
+          document.getElementById("update-button").innerHTML = "UPDATED!"
+          document.getElementById("update-button").style.backgroundColor = "#EB8172";
+          document.getElementById("update-button").style.color = "white";
         })
         .catch((err) => {
           debugger
         })
-
     });
 
 </script>
