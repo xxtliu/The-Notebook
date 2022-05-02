@@ -136,12 +136,27 @@ app.get("/sessionLogout", (req, res) => {
   res.redirect("/sign-in");
 });
 
-app.post("/dog-messages", authMiddleware, async (req, res) => {
+app.post("/write-notes", authMiddleware, async (req, res) => {
 
   try {
     const message = req.body.message;
     const user = req.user;
-    const wishornote = req.body.wishornote;
+    const wishornote = false;
+    await userFeed.add(user, message, wishornote);
+    res.redirect("/dashboard");
+  } catch (err) {
+    res.status(500).send({
+      message: err
+    });
+  }
+});
+
+app.post("/make-wish", authMiddleware, async (req, res) => {
+
+  try {
+    const message = req.body.message;
+    const user = req.user;
+    const wishornote = true;
     await userFeed.add(user, message, wishornote);
     res.redirect("/dashboard");
   } catch (err) {
