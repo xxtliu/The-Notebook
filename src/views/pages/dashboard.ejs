@@ -22,7 +22,6 @@
 
 <body>
   <div class="container">
-
     <header>
       <%- include('../partials/nav', { signedIn: true }) %>
     </header>
@@ -31,16 +30,31 @@
 
       <div class="columns">
         <div class="column is-2" style="text-align: right;"></div>
-
         <div class="column is-8">
-          <div class="box notification" id="notification">
-            <button class="delete" onclick="remove()"></button>
-            Check out the new notes for you!
-          </div>
-
-          <div class="feed-stream">
-            <%- include('../partials/feed-stream', { feed: feed }) %>
-          </div>
+          <% if (feed.length!=0) {%>
+            <div class="box notification" id="notification">
+              <button class="delete" onclick="remove()"></button>
+              Check out the new notes for you!
+            </div>
+            <% if(feed.length < 4) { %>
+              <div>
+                <div class="feed-stream" style="padding-bottom:5rem">
+                  <%- include('../partials/feed-stream', { feed: feed }) %>
+                </div>
+              </div>
+              <% } else { %>
+                <div class="feed-stream">
+                  <%- include('../partials/feed-stream', { feed: feed }) %>
+                </div>
+                <% } %>
+                  <% } else { %>
+                    <section class="section is-medium" style="padding-bottom:20rem">
+                      <div class="box notification" id="notification" style="padding: 5rem 3rem;">
+                        <button class="delete" onclick="remove()"></button>
+                        <div class="title">Sorry, there is currently no notes for you :(</div>
+                      </div>
+                    </section>
+                    <% }%>
         </div>
       </div>
     </section>

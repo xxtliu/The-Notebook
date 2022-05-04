@@ -6,9 +6,6 @@ const admin = require('firebase-admin');
 const app = express();
 const port = process.env.PORT || 8080;
 
-// CS5356 TODO #2
-// Uncomment this next line after you've created
-// serviceAccountKey.json
 const serviceAccount = require("./../config/serviceAccountKey.json");
 
 admin.initializeApp({
@@ -56,8 +53,8 @@ app.get("/settings", authMiddleware, async function (req, res) {
 });
 
 app.get("/dashboard", authMiddleware, async function (req, res) {
-  const feed = await userFeed.get();
   const userInfo = await userService.getUserByEmail(req.user.email);
+  const feed = await userFeed.get(userInfo);
   res.render("pages/dashboard", {
     user: req.user,
     userInfo,
@@ -67,7 +64,7 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
 
 app.get("/write-note", authMiddleware, async function (req, res) {
   const userInfo = await userService.getUserByEmail(req.user.email);
-  const feed = await userFeed.get();
+  const feed = await userFeed.get(userInfo);
   res.render("pages/write-note", {
     user: req.user,
     userInfo,
@@ -77,7 +74,7 @@ app.get("/write-note", authMiddleware, async function (req, res) {
 
 app.get("/make-a-wish", authMiddleware, async function (req, res) {
   const userInfo = await userService.getUserByEmail(req.user.email);
-  const feed = await userFeed.get();
+  const feed = await userFeed.get(userInfo);
   res.render("pages/make-a-wish", {
     user: req.user,
     userInfo,
@@ -86,11 +83,7 @@ app.get("/make-a-wish", authMiddleware, async function (req, res) {
 });
 
 app.post("/sessionLogin", async (req, res) => {
-  // CS5356 TODO #4
-  // Get the ID token from the request body
-  // Create a session cookie using the Firebase Admin SDK
-  // Set that cookie with the name 'session'
-  // And then return a 200 status code instead of a 501
+
   const idToken = req.body.idToken;
   const signInType = req.body.signInType;
   const username = req.body.username;
@@ -141,12 +134,11 @@ app.get("/sessionLogout", (req, res) => {
 });
 
 app.post("/write-notes", authMiddleware, async (req, res) => {
-
   try {
     const message = req.body.message;
-    const user = req.user;
     const wishornote = false;
-    await userFeed.add(user, message, wishornote);
+    const userInfo = await userService.getUserByEmail(req.user.email);
+    userFeed.add(message, userInfo, wishornote);
     res.redirect("/dashboard");
   } catch (err) {
     res.status(500).send({
@@ -156,12 +148,11 @@ app.post("/write-notes", authMiddleware, async (req, res) => {
 });
 
 app.post("/make-wish", authMiddleware, async (req, res) => {
-
   try {
     const message = req.body.message;
-    const user = req.user;
     const wishornote = true;
-    await userFeed.add(user, message, wishornote);
+    const userInfo = await userService.getUserByEmail(req.user.email);
+    userFeed.add(message, userInfo, wishornote);
     res.redirect("/dashboard");
   } catch (err) {
     res.status(500).send({

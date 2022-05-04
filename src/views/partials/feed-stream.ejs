@@ -1,17 +1,15 @@
 <% feed.forEach(function(feedItem) { %>
   <article style="margin-bottom: 3em;">
     <div class="card">
-      <div class="card-image">
-
-      </div>
       <div class="card-content">
         <div class="media">
           <div class="media-left">
             <figure class="image is-48x48">
-              <% if(feedItem.wishornote ) { %>
+              <% if(feedItem.wishornote) { %>
                 <img class="is-rounded" src="https://github.com/xxtliu/The-Notebook/blob/main/makewish.png?raw=true" />
                 <% } else { %>
-                  <img class="is-rounded" src="https://github.com/xxtliu/The-Notebook/blob/main/diary-icon.png?raw=true" />
+                  <img class="is-rounded"
+                    src="https://github.com/xxtliu/The-Notebook/blob/main/diary-icon.png?raw=true" />
                   <% }%>
             </figure>
           </div>
@@ -20,7 +18,9 @@
               <%= feedItem.name %>
             </p>
             <p class="subtitle is-6">
-              <%= feedItem.nameHandle %>
+              Posted from <i>
+                <%= feedItem.location %>
+              </i> at <%= feedItem.postAt %>
             </p>
           </div>
         </div>

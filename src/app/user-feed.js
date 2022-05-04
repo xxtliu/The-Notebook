@@ -1,41 +1,63 @@
 const casual = require("casual");
 const fetch = require("node-fetch");
+const uuid = require("uuid");
 
-const userFeed = [];
-
-const get = async () => {
-  if (userFeed.length === 0) {
-    const response = await fetch("https://dog.ceo/api/breeds/image/random/7");
-    const body = await response.json();
-    for (const dogUrl of body.message) {
-      userFeed.push({
-        name: casual.full_name,
-        nameHandle: `@${casual.username}`,
-        message: `${casual.sentence}. ${casual.sentence}`,
-        imageSource: dogUrl,
-        wishornote: casual.coin_flip,
-      });
-    }
-  } else {
-    return userFeed;
-  }
-
-  return userFeed;
-};
-
-const add = async (user, message, wishornote) => {
-  const response = await fetch("https://dog.ceo/api/breeds/image/random/1");
-  const body = await response.json();
-  userFeed.unshift({
-    name: user.name,
-    nameHandle: user.email,
-    message: message,
-    imageSource: body.message,
-    wishornote: wishornote,
-  });
-};
+const admin = require("firebase-admin");
+const db = admin.firestore();
 
 module.exports = {
-  get,
-  add,
+  get: async (userInfo) => {
+
+    const userFeed = [];
+
+    const messages = db.collection('messages');
+    const snapshot = await messages.where('postByEmail', 'in', [userInfo.email, userInfo.viewer]).get();
+
+    if (snapshot.empty) {
+      return userFeed;
+    }
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      userFeed.unshift({
+        name: data.postByName,
+        nameHandle: data.postByEmail,
+        message: data.message,
+        timestamp: data.timestamp,
+        postAt: data.postAt,
+        location: data.location,
+        wishornote: data.wishornote,
+      });
+    });
+
+    userFeed.sort(function (a, b) {
+      var keyA = a.timestamp,
+        keyB = b.timestamp;
+      if (keyA > keyB) return -1;
+      if (keyA < keyB) return 1;
+      return 0;
+    });
+
+    return userFeed;
+  },
+
+  add: async (message, userInfo, wishornote) => {
+    const id = uuid.v4();
+    const time = new Date();
+    const postAt = time.getHours() + ':' + time.getMinutes() + ', ' + (time.getMonth() + 1) + '/' + time.getDate() + '/' + time.getFullYear();
+    const docRef = db.collection('messages').doc(id)
+    await docRef.set({
+      messageID: id,
+      message: message,
+      timestamp: time,
+      postAt: postAt,
+      postByEmail: userInfo.email,
+      postByName: userInfo.username,
+      location: userInfo.location,
+      viewBy: userInfo.viewer,
+      wishornote: wishornote,
+    });
+
+  },
+
 };
