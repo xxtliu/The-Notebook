@@ -21,6 +21,7 @@
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
-    "cypress": "^9.3.1"
+    "cypress": "^9.3.1",
+    "first-input-delay": "^0.1.3"
   }
 }
